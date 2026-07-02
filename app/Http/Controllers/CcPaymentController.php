@@ -11,7 +11,7 @@ class CcPaymentController extends Controller
     public function getCoinList()
     {
         $app_id = "9uWkOaQcHcipuk6z";
-        $app_secret = "6b1f3587ef18d7fb0577f961f0329741";
+        $app_secret = "4c1d09ae3e977f7ef12946822cfad213";
         $url = "https://ccpayment.com/ccpayment/v2/getCoinList";
         $content = [];
 
