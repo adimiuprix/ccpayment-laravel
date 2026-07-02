@@ -32,4 +32,32 @@ class CcPaymentController extends Controller
         $result = $response->json();
         dd($result);
     }
+
+    public function createOrder(){
+        $app_id = "9uWkOaQcHcipuk6z";
+        $app_secret = "4c1d09ae3e977f7ef12946822cfad213";
+
+        $url       = 'https://ccpayment.com/ccpayment/v2/createAppOrderDepositAddress';
+
+        $body = [
+            'coinId'  => 1280,
+            'price'   => '1',
+            'orderId' => 'JIHniornmeionrm',
+            'chain'   => 'POLYGON',
+        ];
+
+        $timestamp = time();
+        $json      = json_encode($body);
+        $sign      = hash_hmac('sha256', $app_id.$timestamp.($json === '[]' ? '' : $json), $app_secret);
+
+        $result = Http::withHeaders([
+                'Appid'     => $app_id,
+                'Sign'      => $sign,
+                'Timestamp' => $timestamp,
+            ])
+            ->post($url, $body)
+            ->json();
+
+        dd($result);
+    }
 }
